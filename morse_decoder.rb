@@ -60,4 +60,31 @@ def decode_char(morse_char)
 end
 # rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength
 
-puts decode_char("-")
+puts decode_char('-')
+
+def decode_word(morse_word)
+  temp = ''
+  morse_word.split(/\s/).each do |char|
+    decoded = decode_char(char)
+    temp += decoded
+  end
+  temp
+end
+
+puts decode_word('-. .- -- .')
+
+def decode(morse_text)
+  temp = ''
+  result = ''
+  morse_text.split('  ').each do |e|
+    e.split(' ').each do |char|
+      decoded = decode_word(char)
+      temp += decoded
+    end
+    result += "#{temp} "
+    temp = ''
+  end
+  result
+end
+
+puts decode('.-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-.   .-. ..- -... .. . ...')
